@@ -25,6 +25,9 @@ def main():
     kettei_button = pygame.Rect(100, 30, 50, 50)
     kettei_text = font.render("Enter", True, black)
 
+    retry_button = pygame.Rect(70, 30, 50, 50)
+    retry_text = font.render("retry", True, black)
+
     # スライダー
     slider_x = 100
     slider_y = height // 2
@@ -74,6 +77,8 @@ def main():
         elif mode == "win":
             win_text = pygame.font.SysFont(None, 100).render("WIN", True, white)
             screen.blit(win_text, (width // 2 - 80, height // 2 - 45))
+            pygame.draw.rect(screen, white, retry_button)
+            screen.blit(retry_text, (70, 50))
             
 
         elif mode == "lose":
@@ -81,6 +86,8 @@ def main():
             frequency_text = pygame.font.SysFont(None, 50).render(f"{frequency} Hz", True, white)
             screen.blit(lose_text, (width // 2 - 80, height // 2 - 45))
             screen.blit(frequency_text, (width // 2 - 80, height // 2  + 30))
+            pygame.draw.rect(screen, white, retry_button)
+            screen.blit(retry_text, (70, 50))         
 
         pygame.display.update()
 
