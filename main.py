@@ -143,7 +143,7 @@ def main():
                         wave = generate_sin_wave(frequency)
                         sound = pygame.mixer.Sound(buffer=wave)
                         sound.play()
-                        print({frequency})
+                        
 
                     elif kettei_button.collidepoint(event.pos):
                         print("決定:", frequency, " Hz")
