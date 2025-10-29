@@ -30,6 +30,10 @@ def main():
     retry_button = pygame.Rect(70, 30, 70, 50)
     retry_text = font.render("Retry", True, black)
 
+    exit_button = pygame.Rect(180, 30, 70, 50)
+    exit_text = font.render("Exit", True, black)
+
+
     slider_x = 100
     slider_y = height // 2
     slider_width = 400
@@ -99,6 +103,7 @@ def main():
             ratio = (handle_x - slider_x) / slider_width
             frequency = int(hz_min + ratio * (hz_max - hz_min))
 
+
             retry_text_disp = font.render(f"Retries: {retry_count}", True, white)
             screen.blit(retry_text_disp, (width - 150, 30))
             if best_score is not None:
@@ -113,6 +118,9 @@ def main():
 
             score_text = mid_font.render(f"Retries: {retry_count}", True, white)
             screen.blit(score_text, (width // 2 - 90, height // 2 + 60))
+
+            pygame.draw.rect(screen, white, exit_button)
+            screen.blit(exit_text, (195, 50))
 
             if new_best:
                 best_text = mid_font.render("BEST SCORE!", True, red)
@@ -129,6 +137,9 @@ def main():
             score_text = mid_font.render(f"Retries: {retry_count}", True, white)
             screen.blit(score_text, (width // 2 - 90, height // 2 + 100))
 
+            pygame.draw.rect(screen, white, exit_button)
+            screen.blit(exit_text, (195, 50))
+
         pygame.display.update()
 
         for event in pygame.event.get():
@@ -143,7 +154,6 @@ def main():
                         wave = generate_sin_wave(frequency)
                         sound = pygame.mixer.Sound(buffer=wave)
                         sound.play()
-                        
 
                     elif kettei_button.collidepoint(event.pos):
                         print("決定:", frequency, " Hz")
@@ -217,6 +227,11 @@ def main():
                         hz_max = random.randint(440, 480)
                         if mode == "win":
                             retry_count = 0  
+                    elif exit_button.collidepoint(event.pos):
+                        running = False
+                        pygame.quit()
+                        sys.exit()
+
 
 if __name__ == "__main__":
     main()
